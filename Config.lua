@@ -10,6 +10,7 @@ Prefix         = "<{PLAYERNAME}> {MESSAGE}",
 UsePlayerColor = true,
 UseRankColor   = false,
 ChatPerWorld   = true,
+AllowChatColor = true,
 ColorSymbol    = "@",
 
 PersonalPrefixes =

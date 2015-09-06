@@ -31,6 +31,18 @@ function OnChat(a_Player, a_Message)
 		end
 	end
 	
+	if (g_Config.AllowChatColor and a_Player:HasPermission("chatter.usecolors")) then
+		a_Message = a_Message:gsub("(." .. g_Config.ColorSymbol .. ".)", 
+			function(a_Char)
+				if (not IsColor(a_Char:sub(3))) then
+					return
+				end
+				
+				return cChatColor.Color .. a_Char:sub(3)
+			end
+		)
+	end
+	
 	local Groups = table.concat(GroupArray, ",")
 		
 	TempMessage = TempMessage
