@@ -32,13 +32,21 @@ function OnChat(a_Player, a_Message)
 	end
 	
 	if (g_Config.AllowChatColor and a_Player:HasPermission("chatter.usecolors")) then
-		a_Message = a_Message:gsub("(." .. g_Config.ColorSymbol .. ".)", 
+		a_Message = a_Message:gsub("(.?" .. g_Config.ColorSymbol .. ".)", 
 			function(a_Char)
-				if (not IsColor(a_Char:sub(3))) then
+				local ColorCharPos = 2
+				if (a_Char:len() == 3) then
+					if (a_Char:sub(1, 1) == g_Config.ColorSymbol) then
+						return
+					end
+					ColorCharPos = 3
+				end
+				
+				if (not IsColor(a_Char:sub(ColorCharPos))) then
 					return
 				end
 				
-				return cChatColor.Color .. a_Char:sub(3)
+				return cChatColor.Color .. a_Char:sub(ColorCharPos)
 			end
 		)
 	end
