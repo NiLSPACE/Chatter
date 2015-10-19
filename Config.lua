@@ -54,7 +54,7 @@ function LoadConfig(a_Path)
 	assert(type(a_Path) == 'string')
 	
 	-- Check if the config file exists
-	if (not cFile:Exists(a_Path)) then
+	if (not cFile:IsFile(a_Path)) then
 		LOGWARNING("[Chatter] Config file does not exist. Using defaults.")
 		WriteDefaultConfigToPath(a_Path)
 	end
