@@ -32,7 +32,11 @@ RankPrefixes =
 
 -- Writes the default config to the given path
 function WriteDefaultConfigToPath(a_Path)
-	local File = io.open(a_Path, "w")
+	local File, Err = io.open(a_Path, "w")
+	if not(File) then
+		LOGERROR("Chatter: Cannot write default config to file " .. a_Path .. ": " .. Err)
+		return
+	end
 	File:write(m_ConfigDefaults)
 	File:close()
 end
